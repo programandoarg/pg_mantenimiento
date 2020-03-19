@@ -1,0 +1,6 @@
+table.table
+  tr
+    th Nombre
+  - @archivos.each do |archivo|
+    tr
+      td = archivo.key
