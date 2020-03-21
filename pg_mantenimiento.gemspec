@@ -30,10 +30,9 @@ Gem::Specification.new do |spec|
   spec.add_dependency "slim-rails"
   spec.add_dependency 'aws-sdk-s3', '~> 1'
   spec.add_dependency 'jquery-rails'
-  spec.add_dependency 'bootstrap', '~> 4.4.1'
-  spec.add_dependency 'bootstrap-datepicker-rails', '~> 1.9'
   spec.add_dependency 'sys-filesystem'
 
+  spec.add_development_dependency 'bootstrap-datepicker-rails', '~> 1.8'
   spec.add_development_dependency "sqlite3"
   spec.add_development_dependency "byebug"
 end

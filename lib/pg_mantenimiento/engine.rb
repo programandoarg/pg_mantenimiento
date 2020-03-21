@@ -1,8 +1,6 @@
 require 'aws-sdk-s3'
 require 'slim-rails'
 require 'jquery-rails'
-require 'bootstrap'
-require 'bootstrap-datepicker-rails'
 require 'sys-filesystem'
 
 module PgMantenimiento

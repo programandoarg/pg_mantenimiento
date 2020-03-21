@@ -4,12 +4,12 @@ module PgMantenimiento
   class BackupsController < ApplicationController
     def index
       @archivos = cliente_s3
-        .list_objects(bucket: PgMantenimiento.config.s3_bucket, prefix: PgMantenimiento.config.s3_prefijo)
+        .list_objects(bucket: PgMantenimiento.config.aws_s3[:bucket], prefix: PgMantenimiento.config.aws_s3[:prefijo])
         .contents.sort { |a, b| b.key <=> a.key }.take 50
     end
 
     def show
-      @archivo = cliente_s3.get_object(bucket: PgMantenimiento.config.s3_bucket, key: params[:key])
+      @archivo = cliente_s3.get_object(bucket: PgMantenimiento.config.aws_s3[:bucket], key: params[:key])
       @key = params[:key]
     rescue Aws::S3::Errors::NoSuchKey => e
       flash[:error] = "el archivo no existe"
@@ -17,7 +17,7 @@ module PgMantenimiento
     end
 
     def descargar
-      @archivo = cliente_s3.get_object(bucket: PgMantenimiento.config.s3_bucket, key: params[:key])
+      @archivo = cliente_s3.get_object(bucket: PgMantenimiento.config.aws_s3[:bucket], key: params[:key])
       maximos_megas = 50
       if @archivo.content_length < (maximos_megas * 1024 * 1024) # si supera el tamaño permitido
         send_data @archivo.body.read, filename: params[:key].split('/').last
@@ -34,10 +34,10 @@ module PgMantenimiento
 
     def cliente_s3
       @cliente_s3 ||= Aws::S3::Client.new(
-        region: ENV['PG_MANTENIMIENTO_AWS_REGION'],
+        region: PgMantenimiento.config.aws_s3[:region],
         credentials: Aws::Credentials.new(
-          ENV['PG_MANTENIMIENTO_AWS_ACCESS_KEY_ID'],
-          ENV['PG_MANTENIMIENTO_AWS_SECRET_ACCESS_KEY']
+          PgMantenimiento.config.aws_s3[:access_key_id],
+          PgMantenimiento.config.aws_s3[:secret_access_key]
         )
       )
     end
