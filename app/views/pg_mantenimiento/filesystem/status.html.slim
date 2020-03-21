@@ -1,0 +1,15 @@
+.wrapper
+  table.table
+    tr
+      th Tamaño disco
+      td = tamaño_archivo @tamaño_disco
+      td
+    tr
+      th Usado
+      td = tamaño_archivo @usado
+      td = show_percentage 100 * @usado / @tamaño_disco
+
+    tr
+      th Libre
+      td = tamaño_archivo @disponible
+      td = show_percentage 100 * @disponible / @tamaño_disco

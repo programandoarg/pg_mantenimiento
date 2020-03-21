@@ -1,13 +1,14 @@
-.table-responsive
-  table.table.table-sm
-    tr
-      th Nombre
-      th Fecha
-      th Tamaño
-      th
-    - @archivos.each do |archivo|
+.wrapper
+  .table-responsive
+    table.table.table-sm
       tr
-        td = nombre_archivo archivo.key
-        td = fecha_archivo archivo.key
-        td = tamaño_archivo archivo.size
-        td = link_to "Ver", backups_show_path(key: archivo.key)
+        th Nombre
+        th Fecha
+        th Tamaño
+        th
+      - @archivos.each do |archivo|
+        tr
+          td = nombre_archivo archivo.key
+          td = fecha_archivo archivo.key
+          td = tamaño_archivo archivo.size
+          td = link_to "Ver", backups_show_path(key: archivo.key)

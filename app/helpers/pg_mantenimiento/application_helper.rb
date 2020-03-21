@@ -15,5 +15,11 @@ module PgMantenimiento
     def tamaño_archivo(tamaño)
       number_to_human_size tamaño, locale: :en
     end
+
+    def show_percentage(value)
+      return unless value.present?
+
+      "#{value.round(2)} %"
+    end
   end
 end

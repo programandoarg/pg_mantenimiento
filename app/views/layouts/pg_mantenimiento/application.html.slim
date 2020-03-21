@@ -21,9 +21,15 @@ html
           span.navbar-toggler-icon
         #navbarSupportedContent.collapse.navbar-collapse
           ul.navbar-nav.mr-auto
-            li.nav-item.active
+            li.nav-item
               a.nav-link href="#{ backups_index_path }" 
                 | Backups
+            li.nav-item
+              a.nav-link href="#{ base_de_datos_status_path }" 
+                | Base de datos
+            li.nav-item
+              a.nav-link href="#{ filesystem_status_path }" 
+                | Disco duro
             / li.nav-item
               a.nav-link href="#"  Link
             / li.nav-item.dropdown
