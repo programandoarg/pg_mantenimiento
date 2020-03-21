@@ -1,0 +1,15 @@
+table.table
+  tr
+    th Nombre
+    td = nombre_archivo @key
+  tr
+    th Fecha
+    td = fecha_archivo(@key)
+  tr
+    th Tamaño
+    td = tamaño_archivo @archivo.content_length
+  tr
+    th Tipo
+    td = @archivo.content_type
+
+= link_to "Descargar", home_descargar_path(key: @key), class: 'btn btn-primary'

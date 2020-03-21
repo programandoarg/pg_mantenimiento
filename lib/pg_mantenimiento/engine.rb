@@ -7,5 +7,7 @@ require 'bootstrap-datepicker-rails'
 module PgMantenimiento
   class Engine < ::Rails::Engine
     isolate_namespace PgMantenimiento
+
+    config.i18n.default_locale = :es
   end
 end
