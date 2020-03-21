@@ -1,7 +1,7 @@
 require_dependency "pg_mantenimiento/application_controller"
 
 module PgMantenimiento
-  class HomeController < ApplicationController
+  class BackupsController < ApplicationController
     def index
       @archivos = cliente_s3
         .list_objects(bucket: PgMantenimiento.config.s3_bucket, prefix: PgMantenimiento.config.s3_prefijo)
@@ -13,7 +13,7 @@ module PgMantenimiento
       @key = params[:key]
     rescue Aws::S3::Errors::NoSuchKey => e
       flash[:error] = "el archivo no existe"
-      redirect_back fallback_location: home_index_path
+      redirect_back fallback_location: backups_index_path
     end
 
     def descargar
@@ -23,11 +23,11 @@ module PgMantenimiento
         send_data @archivo.body.read, filename: params[:key].split('/').last
       else
         @error = "no se puede descargar el archivo"
-        redirect_back fallback_location: home_index_path
+        redirect_back fallback_location: backups_index_path
       end
     rescue Aws::S3::Errors::NoSuchKey => e
       @error = "el archivo no existe"
-      redirect_back fallback_location: home_index_path
+      redirect_back fallback_location: backups_index_path
     end
 
     private

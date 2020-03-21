@@ -1,5 +1,5 @@
 PgMantenimiento::Engine.routes.draw do
-  get 'home/index'
-  get 'home/show'
-  get 'home/descargar'
+  get 'backups/index'
+  get 'backups/show'
+  get 'backups/descargar'
 end

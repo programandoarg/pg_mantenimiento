@@ -12,4 +12,4 @@ table.table
     th Tipo
     td = @archivo.content_type
 
-= link_to "Descargar", home_descargar_path(key: @key), class: 'btn btn-primary'
+= link_to "Descargar", backups_descargar_path(key: @key), class: 'btn btn-primary'
