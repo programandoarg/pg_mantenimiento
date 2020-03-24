@@ -2,6 +2,7 @@ require 'aws-sdk-s3'
 require 'slim-rails'
 require 'jquery-rails'
 require 'sys-filesystem'
+require 'pundit'
 
 module PgMantenimiento
   class Engine < ::Rails::Engine

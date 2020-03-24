@@ -27,6 +27,7 @@ Gem::Specification.new do |spec|
 
   spec.add_dependency "rails", "~> 5"
   spec.add_dependency 'rails-i18n'
+  spec.add_dependency 'pundit'
   spec.add_dependency "slim-rails"
   spec.add_dependency 'aws-sdk-s3', '~> 1'
   spec.add_dependency 'jquery-rails'

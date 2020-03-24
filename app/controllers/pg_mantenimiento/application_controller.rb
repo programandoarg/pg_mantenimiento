@@ -4,8 +4,11 @@ module PgMantenimiento
 
     protect_from_forgery with: :exception
 
-    # esto es medio choto, porque obliga a tener devise pero bueno
-    before_action :authenticate_user!
+    rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
+
+    before_action do
+      instance_eval(&PgMantenimiento.config.autenticacion_block)
+    end
 
     before_action do
       @empresa = PgMantenimiento.config.nombre_empresa
@@ -27,6 +30,11 @@ module PgMantenimiento
             PgMantenimiento.config.aws_s3[:secret_access_key]
           )
         )
+      end
+
+      def user_not_authorized
+        flash[:alert] = 'No está autorizado para realizar esa acción'
+        redirect_to '/'
       end
   end
 end

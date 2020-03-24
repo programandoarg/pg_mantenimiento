@@ -3,6 +3,7 @@ module PgMantenimiento
     attr_accessor :nombre_empresa
     attr_accessor :aws_s3
     attr_accessor :modelos
+    attr_reader :autenticacion_block
 
     def initialize
       @nombre_empresa = 'Empresa'
@@ -14,6 +15,10 @@ module PgMantenimiento
         secret_access_key: ENV['PG_MANTENIMIENTO_AWS_SECRET_ACCESS_KEY'],
       }
       @modelos = []
+    end
+
+    def autenticacion(&block)
+      @autenticacion_block = block
     end
   end
 end
