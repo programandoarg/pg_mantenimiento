@@ -1,15 +1,18 @@
 module PgMantenimiento
   module ApplicationHelper
 
-    # a partir de la key de un archivo en S3
     def nombre_archivo(key)
-      key.split('/').last
+      # key.split('/').last
+      PgMantenimiento.config.nombre_empresa.downcase.gsub(' ', '_') + ".tar"
     end
 
     # a partir de la key de un archivo en S3
     def fecha_archivo(key)
-      # DateTime.strptime(key.split('/')[2], "%Y.%m.%d.%H.%M.%S").strftime('%d/%m/%Y %H:%M')
-      Time.zone.strptime("#{key.split('/')[2]} UTC", "%Y.%m.%d.%H.%M.%S %Z").strftime('%d/%m/%Y %H:%M')
+      Time.zone.strptime("#{key.split('/')[2]} UTC", "%Y.%m.%d.%H.%M.%S %Z")
+    end
+
+    def dmy(fecha)
+      fecha.strftime('%d/%m/%Y %H:%M')
     end
 
     def tamaño_archivo(tamaño)
@@ -20,6 +23,27 @@ module PgMantenimiento
       return unless value.present?
 
       "#{value.round(2)} %"
+    end
+
+    def clase_espacio_utilizado(porcentaje_utilizado)
+      case porcentaje_utilizado
+      when 0..80
+        'text-success'
+      when 80..90
+        'text-warning'
+      when 90..100
+        'text-danger'
+      end
+    end
+
+    def clase_ultimo_backup(tiempo_desde_ultimo_backup)
+      if tiempo_desde_ultimo_backup < 1.day
+        return 'text-success'
+      end
+      if tiempo_desde_ultimo_backup < 2.day
+        return 'text-warning'
+      end
+      'text-danger'
     end
   end
 end

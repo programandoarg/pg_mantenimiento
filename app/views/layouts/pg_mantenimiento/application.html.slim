@@ -16,34 +16,16 @@ html
   body
     .container
       nav.navbar.navbar-expand-lg.navbar-light.bg-light
-        a.navbar-brand href="#" = @empresa
+        a.navbar-brand href="#{ root_path }" = @empresa
         button.navbar-toggler aria-controls="navbarSupportedContent" aria-expanded="false" aria-label=("Toggle navigation") data-target="#navbarSupportedContent" data-toggle="collapse" type="button" 
           span.navbar-toggler-icon
         #navbarSupportedContent.collapse.navbar-collapse
           ul.navbar-nav.mr-auto
             li.nav-item
+              a.nav-link href="#{ dashboard_status_path }" 
+                | Dashboard
+            li.nav-item
               a.nav-link href="#{ backups_index_path }" 
                 | Backups
-            li.nav-item
-              a.nav-link href="#{ base_de_datos_status_path }" 
-                | Base de datos
-            li.nav-item
-              a.nav-link href="#{ filesystem_status_path }" 
-                | Disco duro
-            / li.nav-item
-              a.nav-link href="#"  Link
-            / li.nav-item.dropdown
-              a#navbarDropdown.nav-link.dropdown-toggle aria-expanded="false" aria-haspopup="true" data-toggle="dropdown" href="#" role="button" 
-                | Dropdown
-              .dropdown-menu aria-labelledby="navbarDropdown" 
-                a.dropdown-item href="#"  Action
-                a.dropdown-item href="#"  Another action
-                .dropdown-divider
-                a.dropdown-item href="#"  Something else here
-            / li.nav-item
-              a.nav-link.disabled aria-disabled="true" href="#" tabindex="-1"  Disabled
-          / form.form-inline.my-2.my-lg-0
-            input.form-control.mr-sm-2 aria-label="Search" placeholder="Search" type="search" /
-            button.btn.btn-outline-success.my-2.my-sm-0 type="submit"  Search
 
       = yield

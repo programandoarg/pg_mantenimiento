@@ -1,14 +1,19 @@
-.wrapper
-  .table-responsive
-    table.table.table-sm
-      tr
-        th Nombre
-        th Fecha
-        th Tamaño
-        th
-      - @archivos.each do |archivo|
-        tr
-          td = nombre_archivo archivo.key
-          td = fecha_archivo archivo.key
-          td = tamaño_archivo archivo.size
-          td = link_to "Ver", backups_show_path(key: archivo.key)
+.row.mt-4.mb-4
+  .col-8.offset-2
+    p Los backups se generan automáticamente todos los días y tienen toda la información de la base de datos. Están comprimidos en formato <b>.tar</b> y se pueden abrir con la aplicación <a href="https://www.7-zip.org/" target="_blank">7-zip</a> que es software libre.
+
+    .text-center
+      .wrapper
+        .table-responsive
+          table.table.table-sm
+            tr
+              th Nombre
+              th Fecha
+              th Tamaño
+              th
+            - @archivos.each do |archivo|
+              tr
+                td = nombre_archivo archivo.key
+                td = dmy(fecha_archivo archivo.key)
+                td = tamaño_archivo archivo.size
+                td = link_to "Ver", backups_show_path(key: archivo.key)

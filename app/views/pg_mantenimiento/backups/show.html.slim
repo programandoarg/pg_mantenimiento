@@ -1,16 +1,19 @@
-.wrapper
-  table.table
-    tr
-      th Nombre
-      td = nombre_archivo @key
-    tr
-      th Fecha
-      td = fecha_archivo(@key)
-    tr
-      th Tamaño
-      td = tamaño_archivo @archivo.content_length
-    tr
-      th Tipo
-      td = @archivo.content_type
+.text-center.mt-5
+  .row
+    .col-8.offset-2
+      table.table
+        tr
+          th Nombre
+          td = nombre_archivo @key
+        tr
+          th Fecha
+          td = dmy(fecha_archivo(@key))
+        tr
+          th Tamaño
+          td = tamaño_archivo @archivo.content_length
+        tr
+          th Tipo
+          td = @archivo.content_type
 
-  = link_to "Descargar", backups_descargar_path(key: @key), class: 'btn btn-primary'
+      = link_to "Volver al inicio", dashboard_status_path, class: 'btn btn-primary mr-1'
+      = link_to "Descargar", backups_descargar_path(key: @key), class: 'btn btn-link'

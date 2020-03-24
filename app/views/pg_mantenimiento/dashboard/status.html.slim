@@ -1,0 +1,45 @@
+.row.mt-4
+  .col
+    .card
+      .card-header
+        h5 Backups
+      .card-body
+        p class="#{ clase_ultimo_backup(@tiempo_desde_ultimo_backup) }"
+          | El último backup se realizó hace #{ time_ago_in_words(@fecha_ultimo_backup) }.
+          |  
+          = link_to "Ver todos", backups_index_path
+
+    .card.mt-4
+      .card-header
+        h5 Disco rígido
+      .card-body
+        p.mb-4
+          | El disco rígido es importante que se mantenga con 
+          | una buena cuota de espacio libre. En caso de que el espacio utilizado estuviera 
+          | por encima del 90% habría que tomar medidas para liberar espacio o agregar 
+          | más capacidad al disco.
+        table.table
+          tr
+            th Tamaño disco
+            td = tamaño_archivo @tamaño_disco
+            td
+          tr
+            th Utilizado
+            td = tamaño_archivo @espacio_utilizado
+            td class="#{ clase_espacio_utilizado(@porcentaje_utilizado) }" = show_percentage @porcentaje_utilizado
+  .col
+    .card
+      .card-header
+        h5 Entidades
+      .card-body
+        p.mb-4 En esta sección se pueden ver las entidades de la aplicación y el espacio que ocupan en disco.
+        table.table.table-sm
+          tr
+            th Nombre
+            th Cantidad
+            th Tamaño en disco
+          - @tablas.each do |tabla|
+            tr
+              td = tabla[:nombre]
+              td = tabla[:cantidad_filas]
+              td = tamaño_archivo tabla[:tamaño]
