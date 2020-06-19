@@ -27,5 +27,7 @@ html
             li.nav-item
               a.nav-link href="#{ backups_index_path }" 
                 | Backups
-
+      - if flash[:error].present?
+        .alert.alert-danger.mt-4
+          = flash[:error]
       = yield
