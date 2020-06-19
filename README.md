@@ -50,3 +50,13 @@ PgMantenimiento.configurar do |c|
 end
 
 ```
+
+En el routes.rb
+```ruby
+mount PgMantenimiento::Engine => "/pg_mantenimiento"
+```
+
+En la navbar se linkea con:
+```ruby
+pg_mantenimiento.root_path
+```
