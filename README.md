@@ -9,7 +9,7 @@ Una pantalla que muestra
 
 En el Gemfile:
 ```ruby
-gem 'pg_mantenimiento', git: 'https://github.com/programandoarg/pg_mantenimiento.git', tag: 'v1.0'
+gem 'pg_mantenimiento', git: 'https://github.com/programandoarg/pg_mantenimiento.git', tag: 'v1.0.1'
 ```
 
 Luego ejecutar:
