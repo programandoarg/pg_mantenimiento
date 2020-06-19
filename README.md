@@ -60,3 +60,9 @@ En la navbar se linkea con:
 ```ruby
 pg_mantenimiento.root_path
 ```
+
+En .rbenv-vars o .env, setear las credenciales de S3
+```
+PG_MANTENIMIENTO_AWS_ACCESS_KEY_ID=
+PG_MANTENIMIENTO_AWS_SECRET_ACCESS_KEY=
+```
