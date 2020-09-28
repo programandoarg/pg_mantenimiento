@@ -1,4 +1,6 @@
 module PgMantenimiento
+  class Error < StandardError; end
+
   class ApplicationController < ActionController::Base
     include ApplicationHelper
 
@@ -20,6 +22,8 @@ module PgMantenimiento
         cliente_s3
           .list_objects(bucket: PgMantenimiento.config.aws_s3[:bucket], prefix: PgMantenimiento.config.aws_s3[:prefijo])
           .contents.sort { |a, b| b.key <=> a.key }.take(take)
+      rescue Aws::Errors::MissingCredentialsError => e
+        raise Error, 'Error de configuración. Faltan credenciales de S3'
       end
 
       def cliente_s3

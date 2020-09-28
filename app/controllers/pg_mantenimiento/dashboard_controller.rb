@@ -2,6 +2,13 @@ require_dependency "pg_mantenimiento/application_controller"
 
 module PgMantenimiento
   class DashboardController < ApplicationController
+    rescue_from Error, with: :error
+
+    def error(error)
+      @mensaje = error.message
+      render 'error'
+    end
+
     def status
       filesystem
       tablas
