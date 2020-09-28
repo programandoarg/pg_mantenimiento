@@ -10,7 +10,9 @@
 // Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
 // about supported directives.
 //
-//= require rails-ujs
+//TODO: por compatibilidad con Rails 4 comento el rails-ujs, que igual no se necesita.
+//      cuando probella este en Rails 5 ya se puede descomentar
+//# require rails-ujs
 //= require_tree .
 
 //= require jquery3

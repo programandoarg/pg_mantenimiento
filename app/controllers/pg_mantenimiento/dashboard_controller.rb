@@ -13,8 +13,10 @@ module PgMantenimiento
       filesystem
       tablas
       @ultimo_backup = backups(1).first
-      @fecha_ultimo_backup = fecha_archivo(@ultimo_backup.key)
-      @tiempo_desde_ultimo_backup = Time.zone.now - @fecha_ultimo_backup
+      if @ultimo_backup.present?
+        @fecha_ultimo_backup = fecha_archivo(@ultimo_backup.key)
+        @tiempo_desde_ultimo_backup = Time.zone.now - @fecha_ultimo_backup
+      end
     end
 
     private
@@ -34,7 +36,7 @@ module PgMantenimiento
         {
           nombre: modelo.model_name.human,
           cantidad_filas: modelo.count,
-          tamaño: @tamaño_tablas[modelo.table_name]
+          tamaño: @tamaño_tablas[modelo.table_name].to_i
         }
       end.sort { |a, b| b[:tamaño] <=> a[:tamaño] }
     end

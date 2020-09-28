@@ -8,7 +8,8 @@ module PgMantenimiento
 
     # a partir de la key de un archivo en S3
     def fecha_archivo(key)
-      Time.zone.strptime("#{key.split('/')[2]} UTC", "%Y.%m.%d.%H.%M.%S %Z")
+      # TODO: en rails 5 cambiar a Time.zone
+      Time.strptime("#{key.split('/')[2]} UTC", "%Y.%m.%d.%H.%M.%S %Z")
     end
 
     def dmy(fecha)

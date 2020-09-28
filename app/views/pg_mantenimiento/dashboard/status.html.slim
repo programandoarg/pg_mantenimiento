@@ -4,10 +4,13 @@
       .card-header
         h5 Backups
       .card-body
-        p class="#{ clase_ultimo_backup(@tiempo_desde_ultimo_backup) }"
-          | El último backup se realizó hace #{ time_ago_in_words(@fecha_ultimo_backup) }.
-          |  
-          = link_to "Ver todos", backups_index_path
+        - if @fecha_ultimo_backup.present?
+          p class="#{ clase_ultimo_backup(@tiempo_desde_ultimo_backup) }"
+            | El último backup se realizó hace #{ time_ago_in_words(@fecha_ultimo_backup) }.
+            |  
+            = link_to "Ver todos", backups_index_path
+        - else
+          .alert.alert-danger No hay backups
 
     .card.mt-4
       .card-header
